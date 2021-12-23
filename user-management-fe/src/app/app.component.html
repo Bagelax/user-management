@@ -1,0 +1,21 @@
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<div *ngIf="loggedIn()">
+  <ul>
+    <li><a routerLink="/">Home</a></li>
+    <li *ngIf="hasPermission('CAN_READ_USERS')"><a routerLink="/users">Users</a></li>
+    <li *ngIf="hasPermission('CAN_CREATE_USERS')"><a routerLink="/users/new">New user</a></li>
+  </ul>
+  <br>
+  <br>
+  <button (click)="logout()">Logout</button>
+  <br>
+  <br>
+</div>
+
+<router-outlet></router-outlet>

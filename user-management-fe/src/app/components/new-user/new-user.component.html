@@ -1,0 +1,52 @@
+<form (ngSubmit)="addUser()">
+  <label for="email">Email: </label>
+  <input type="text"
+         id="email"
+         name="email"
+         [formControl]="email"
+         required>
+  <div class="error" *ngIf="submitted && email.hasError('required')">
+    Email is required.
+  </div>
+  <div class="error" *ngIf="submitted && email.hasError('email')">
+    Email is invalid.
+  </div>
+  <br>
+  <label for="password">Password: </label>
+  <input type="password"
+         id="password"
+         name="password"
+         [formControl]="password"
+         required>
+  <div class="error" *ngIf="submitted && password.hasError('required')">
+    Password is required.
+  </div>
+  <br>
+  <label for="name">Name: </label>
+  <input type="text"
+         id="name"
+         name="name"
+         [formControl]="name"
+         required>
+  <div class="error" *ngIf="submitted && name.hasError('required')">
+    Name is required.
+  </div>
+  <br>
+  <label for="surname">Surname: </label>
+  <input type="text"
+         id="surname"
+         name="surname"
+         [formControl]="surname"
+         required>
+  <div class="error" *ngIf="submitted && surname.hasError('required')">
+    Surname is required.
+  </div>
+  <br>
+  Permissions:
+  <div *ngFor="let permission of permissionsMapping">
+    <input type="checkbox" name="{{ permission.name }}" id="{{ permission.name }}" value="{{ permission.value }}" [formControl]="permission.control">
+    <label for="{{ permission.name }}">{{ permission.name }}</label>
+  </div>
+  <br>
+  <input type="submit" value="Add user">
+</form>

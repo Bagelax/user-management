@@ -1,0 +1,17 @@
+<table *ngIf="users.length > 0">
+  <tr>
+    <th>email</th>
+    <th>name</th>
+    <th>surname</th>
+    <th>permissions</th>
+    <th *ngIf="hasPermission(deletePermission)">delete</th>
+  </tr>
+  <tr *ngFor="let user of users">
+    <td *ngIf="hasPermission(editPermission)"><a routerLink="/users/{{ user.id }}/edit"> {{ user.email }}</a></td>
+    <td *ngIf="!hasPermission(editPermission)"> {{ user.email }} </td>
+    <td> {{ user.name }} </td>
+    <td> {{ user.surname }} </td>
+    <td> {{ user.permissions }} </td>
+    <th *ngIf="hasPermission(deletePermission)"><button (click)="delete(user.id)">Delete</button></th>
+  </tr>
+</table>

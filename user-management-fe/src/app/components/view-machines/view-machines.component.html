@@ -1,0 +1,62 @@
+<form *ngIf="hasPermission(searchPermission)" (ngSubmit)="filterMachines()">
+  Search:
+  <label for="name">Name: </label>
+  <input type="text" name="name" id="name" [formControl]="filterName">
+  <br>
+  Statuses:
+  <div *ngFor="let status of statuses">
+    <input type="checkbox" name="{{ status.name }}" id="{{ status.name }}" value="{{ status.name }}" [formControl]="status.control">
+    <label for="{{ status.name }}">{{ status.name }}</label>
+  </div>
+  <br>
+  <label for="dateFrom">From date: </label>
+  <input type="date" name="dateFrom" id="dateFrom" [formControl]="filterDateFrom">
+  <br>
+  <label for="dateTo">To date: </label>
+  <input type="date" name="dateTo" id="dateTo" [formControl]="filterDateTo">
+  <br>
+  <input type="submit" value="Search">
+</form>
+<br>
+<table *ngIf="machines.length > 0">
+  <tr>
+    <th>name</th>
+    <th>status</th>
+    <th>created at</th>
+    <th *ngIf="hasPermission(startPermission)">start
+      <br>
+      <input type="checkbox" name="schedule-start" id="schedule-start" [(ngModel)]="scheduleStart">
+      <label for="schedule-start">Schedule start</label>
+      <br>
+      <input type="datetime-local" name="start-date" id="start-date" *ngIf="scheduleStart" [formControl]="scheduleStartTime">
+    </th>
+    <th *ngIf="hasPermission(stopPermission)">stop
+      <br>
+      <input type="checkbox" name="schedule-start" id="schedule-stop" [(ngModel)]="scheduleStop">
+      <label for="schedule-stop">Schedule stop</label>
+      <br>
+      <input type="datetime-local" name="stop-date" id="stop-date" *ngIf="scheduleStop" [formControl]="scheduleStopTime">
+    </th>
+    <th *ngIf="hasPermission(restartPermission)">restart
+      <br>
+      <input type="checkbox" name="schedule-restart" id="schedule-restart" [(ngModel)]="scheduleRestart">
+      <label for="schedule-restart">Schedule restart</label>
+      <br>
+      <input type="datetime-local" name="restart-date" id="restart-date" *ngIf="scheduleRestart" [formControl]="scheduleRestartTime">
+    </th>
+    <th *ngIf="hasPermission(deletePermission)">delete</th>
+  </tr>
+  <tr *ngFor="let machine of machines">
+    <td> {{ machine.name }} </td>
+    <td> {{ machine.status }} </td>
+    <td> {{ machine.createdAt }} </td>
+    <td *ngIf="hasPermission(startPermission)">
+      <button (click)="start(machine.id)" *ngIf="machine.status == 'STOPPED'">Start</button></td>
+    <td *ngIf="hasPermission(stopPermission)">
+      <button (click)="stop(machine.id)" *ngIf="machine.status == 'RUNNING'">Stop</button></td>
+    <td *ngIf="hasPermission(restartPermission)">
+      <button (click)="restart(machine.id)" *ngIf="machine.status == 'RUNNING'">Restart</button></td>
+    <td *ngIf="hasPermission(deletePermission)">
+      <button (click)="delete(machine.id)" *ngIf="machine.status == 'STOPPED'">Delete</button></td>
+  </tr>
+</table>

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ConfigService} from "./services/config.service";
-import {RequestService} from "./services/request.service";
+import {UserService} from "./services/user.service";
 import {NavigationEnd, Router} from "@angular/router";
 import {filter} from "rxjs/operators";
 
@@ -12,7 +12,7 @@ import {filter} from "rxjs/operators";
 export class AppComponent implements OnInit {
   title = 'user-management-fe';
 
-  constructor(private config: ConfigService, private requestService: RequestService, private router: Router) {
+  constructor(private config: ConfigService, private requestService: UserService, private router: Router) {
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
       this.fetchPermissions();
     });
@@ -32,6 +32,7 @@ export class AppComponent implements OnInit {
       this.config.permissionsFetched = true;
       this.requestService.getPermissions().subscribe(permissionsResponse => {
         this.config.permissions = permissionsResponse;
+        if (this.config.permissions.length == 0) alert("You don't have any permissions.");
       }, error => {
         if (error.status == 403) {
           this.config.clearToken();

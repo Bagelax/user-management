@@ -7,6 +7,9 @@ import {NewUserComponent} from "./components/new-user/new-user.component";
 import {IndexComponent} from "./components/index/index.component";
 import {TokenGuard} from "./gurads/token.guard";
 import {PermissionGuard} from "./gurads/permission.guard";
+import {ViewMachinesComponent} from "./components/view-machines/view-machines.component";
+import {NewMachineComponent} from "./components/new-machine/new-machine.component";
+import {ErrorListComponent} from "./components/error-list/error-list.component";
 
 const routes: Routes = [
   {
@@ -41,6 +44,24 @@ const routes: Routes = [
     data: {
       requiredPermission: "CAN_CREATE_USERS"
     }
+  },
+  {
+    path: "machines",
+    component: ViewMachinesComponent,
+    canActivate: [TokenGuard]
+  },
+  {
+    path: "machines/new",
+    component: NewMachineComponent,
+    canActivate: [TokenGuard, PermissionGuard],
+    data: {
+      requiredPermission: "CAN_CREATE_MACHINES"
+    }
+  },
+  {
+    path: "errors",
+    component: ErrorListComponent,
+    canActivate: [TokenGuard]
   },
 ];
 

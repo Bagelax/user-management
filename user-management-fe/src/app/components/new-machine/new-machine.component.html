@@ -1,0 +1,14 @@
+<script src="new-machine.component.ts"></script>
+<form (ngSubmit)="addMachine()">
+  <label for="Name">Name: </label>
+  <input type="text"
+         id="name"
+         name="name"
+         [formControl]="name"
+         required>
+  <div class="error" *ngIf="submitted && name.hasError('required')">
+    Name is required.
+  </div>
+  <br>
+  <input type="submit" value="Add machine">
+</form>

@@ -10,6 +10,9 @@
     <li><a routerLink="/">Home</a></li>
     <li *ngIf="hasPermission('CAN_READ_USERS')"><a routerLink="/users">Users</a></li>
     <li *ngIf="hasPermission('CAN_CREATE_USERS')"><a routerLink="/users/new">New user</a></li>
+    <li><a routerLink="/machines">My machines</a></li>
+    <li *ngIf="hasPermission('CAN_CREATE_MACHINES')"><a routerLink="/machines/new">New machine</a></li>
+    <li><a routerLink="/errors">Error log</a></li>
   </ul>
   <br>
   <br>

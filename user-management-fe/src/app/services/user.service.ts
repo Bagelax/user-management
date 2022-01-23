@@ -11,7 +11,7 @@ import {DeletedResponse} from "../models/deleted-response";
 @Injectable({
   providedIn: 'root'
 })
-export class RequestService {
+export class UserService {
 
   private readonly apiUrl: string;
 

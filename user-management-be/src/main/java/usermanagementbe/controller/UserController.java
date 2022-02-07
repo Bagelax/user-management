@@ -53,20 +53,13 @@ class UserDeletedResponseBody {
 
 @RestController
 @RequestMapping("/users")
-public class UserController {
+public class UserController extends PermissionCheck {
     private final UserService userService;
     private final PermissionService permissionService;
 
     public UserController(UserService userService, PermissionService permissionService) {
         this.userService = userService;
         this.permissionService = permissionService;
-    }
-
-    private boolean checkPermission(Permissions p) {
-        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        for (Permission up : currentUser.getPermissions())
-            if (up.getName().equals(p.name())) return true;
-        return false;
     }
 
     @GetMapping("")

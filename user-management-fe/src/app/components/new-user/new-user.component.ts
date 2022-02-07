@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormArray, FormControl, Validators} from "@angular/forms";
-import {RequestService} from "../../services/request.service";
+import {UserService} from "../../services/user.service";
 import {ConfigService} from "../../services/config.service";
 
 @Component({
@@ -17,7 +17,7 @@ export class NewUserComponent implements OnInit {
   submitted: boolean;
   public permissionsMapping: Array<any>;
 
-  constructor(private config: ConfigService, private requestService: RequestService) {
+  constructor(private config: ConfigService, private requestService: UserService) {
     this.email = new FormControl('', [Validators.required, Validators.email]);
     this.password = new FormControl('', [Validators.required]);
     this.name = new FormControl('', [Validators.required]);

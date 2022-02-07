@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserResponse} from "../../models/user-response";
-import {RequestService} from "../../services/request.service";
+import {UserService} from "../../services/user.service";
 import {ConfigService} from "../../services/config.service";
 
 @Component({
@@ -13,7 +13,7 @@ export class ViewUsersComponent implements OnInit {
   editPermission: string = "CAN_UPDATE_USERS";
   deletePermission: string = "CAN_DELETE_USERS";
 
-  constructor(private requestService: RequestService, private config: ConfigService) {
+  constructor(private requestService: UserService, private config: ConfigService) {
     this.users = new Array<UserResponse>();
   }
 

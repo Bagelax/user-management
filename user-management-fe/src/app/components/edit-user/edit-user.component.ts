@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormArray, FormControl, Validators} from "@angular/forms";
-import {RequestService} from "../../services/request.service";
+import {UserService} from "../../services/user.service";
 import {ConfigService} from "../../services/config.service";
 import {ActivatedRoute, Router} from "@angular/router";
 
@@ -19,7 +19,7 @@ export class EditUserComponent implements OnInit {
   id: string | null;
   public permissionsMapping: Array<any>;
 
-  constructor(private config: ConfigService, private requestService: RequestService, private route: ActivatedRoute, private router: Router) {
+  constructor(private config: ConfigService, private requestService: UserService, private route: ActivatedRoute, private router: Router) {
     this.email = new FormControl('', [Validators.required, Validators.email]);
     this.password = new FormControl('');
     this.name = new FormControl('', [Validators.required]);

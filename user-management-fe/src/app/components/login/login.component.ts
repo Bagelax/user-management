@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from "@angular/forms";
-import {RequestService} from "../../services/request.service";
+import {UserService} from "../../services/user.service";
 import {ConfigService} from "../../services/config.service";
 import {Router} from "@angular/router";
 
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   public submitted: boolean;
 
   constructor(
-    private requestService: RequestService,
+    private requestService: UserService,
     private configService: ConfigService,
     private router: Router
   ) {
